@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'bootstrapform',
 )
 
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

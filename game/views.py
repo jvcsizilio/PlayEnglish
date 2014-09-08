@@ -2,7 +2,6 @@
 from django.shortcuts import render
 from models import Player, Sentence, Language
 import random
-from utils import remover_acentos
 
 
 def home(request, dados={}):
@@ -25,6 +24,7 @@ def get_new_sentence(request):
 
 
 def play(request, dados={}):
+    request.session['last_words'] = []
     player = Player.objects.get(user=request.user)
     dados['player'] = player
     dados['option'] = random.choice(
@@ -34,8 +34,19 @@ def play(request, dados={}):
 
 def correct(request, id):
     dados = {}
+
     player = Player.objects.get(user=request.user)
     sentence = Sentence.objects.get(id=id)
+
+    list_words = request.session.get('list_words')
+    if list_words is not None:
+        list_words.append(sentence.get_sentence)
+    else:
+        list_words = []
+        request.session['list_words'] = list_words
+
+    dados['list_words'] = list_words[-5:]
+
     answer = request.POST.get('answer')
     if answer.lower() in \
             sentence.translate_text.lower().replace(',', ' ').split():

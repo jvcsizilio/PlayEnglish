@@ -20,6 +20,10 @@ class Sentence(models.Model):
         return self.language.language_name + '/ ' +\
             self.original_text + '/' + self.translate_text
 
+    @property
+    def get_sentence(self):
+        return self.original_text + '/' + self.translate_text
+
 
 class Player(models.Model):
     user = models.OneToOneField(User)

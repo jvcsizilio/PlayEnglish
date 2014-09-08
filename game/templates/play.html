@@ -4,26 +4,33 @@
      {% include 'scout.html' %}
     <div class="row">
         <!--<a class="btn btn-danger" href="{% url 'game_gera_nova_lista' %}">Gera nova lista</a>-->
-        <div class="col-sm-6">
+        <div class="col-sm-8">
             <form method="POST" action="{% url 'game_correct' option.id %}">
                 {% csrf_token %}
-                {{option.original_text}}<br>
-                <input type="text" id='answer' name="answer" autofocus>
-                <button type="submit" class="btn btn-info">Test</button>
+                <h1><strong>{{option.original_text}}</strong></h1>
+                <input type="text" id='answer' name="answer" autofocus size="50">
+                <button type="submit" class="btn btn-info"><h4>Test</h4></button>
             </form>
         </div>
+        <div class="col-sm-4">
+            {% for i in list_words %}
+                <h4>{{i}}</h4>
+            {% endfor %}
+        </div>
         <br>
-        <br>
-        <br>
-
     </div>
-        {% if status %}
-            <img src="{{MEDIA_URL}}yes.jpg" width="200px" height="200px">
-        {% elif status == False %}
-            <img src="{{MEDIA_URL}}no.jpg"  width="200px" height="200px">
-        {% else %}
-            <img src="{{MEDIA_URL}}ready.jpg"  width="70%" height="20%">
-        {% endif %}
+    <div class="row">
+            {% if status %}
+                <img src="{{MEDIA_URL}}yes.jpg" width="200px" height="200px">
+            {% elif status == False %}
+                <img src="{{MEDIA_URL}}no.jpg"  width="200px" height="200px">
+            {% else %}
+                <img src="{{MEDIA_URL}}ready.jpg"  width="70%" height="20%">
+            {% endif %}
+    </div>
+
+
+{{teste_xx}}
 
 {% endblock %}
 
