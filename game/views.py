@@ -43,6 +43,7 @@ def correct(request, id):
         list_words.append(sentence.get_sentence)
     else:
         list_words = []
+        list_words.append(sentence.get_sentence)
         request.session['list_words'] = list_words
 
     dados['list_words'] = list_words[-5:]
