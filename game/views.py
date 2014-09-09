@@ -48,7 +48,7 @@ def correct(request, id):
 
     dados['list_words'] = list_words[-5:]
 
-    answer = request.POST.get('answer')
+    answer = request.POST.get('answer').strip()
     if answer.lower() in \
             sentence.translate_text.lower().replace(',', ' ').split():
         player.add_point
