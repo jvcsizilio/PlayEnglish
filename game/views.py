@@ -1,6 +1,7 @@
 # encoding: utf8
 from django.shortcuts import render
 from models import Player, Sentence, Language
+from django.contrib.auth.forms import UserCreationForm
 import random
 
 
@@ -9,6 +10,30 @@ def home(request, dados={}):
     dados['list_words'] = player.sentences_unlocked.all()
     dados['player'] = player
     return render(request, 'game.html', dados)
+
+
+def register(request):
+    form = UserCreationForm()
+    return render(request, 'register.html', {'form': form})
+
+
+def confirm_register(request):
+    dados = {}
+
+    form = UserCreationForm(request.POST or None)
+
+    if form.is_valid():
+        user = form.save(commit=False)
+        user.is_staff = True
+        user.save()
+        new_player(user)
+        dados['message'] =\
+            u'Welcome {nome}'.format(nome=user.username)
+        return render(request, 'register.html', dados)
+    else:
+        dados = {}
+        dados['form'] = form
+        return render(request, 'register.html', {'form': form})
 
 
 def get_new_sentence(request):
@@ -70,3 +95,12 @@ def gera_nova_lista(request):
             language=lang, original_text=string[1],
             translate_text=string[3], level=1)
         sent.save()
+
+
+def new_player(user):
+    player = Player(
+        user=user, level=1, points=10)
+    player.save()
+    player.add_sentence
+    player.add_sentence
+    player.add_sentence

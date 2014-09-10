@@ -1,0 +1,20 @@
+{% extends "base_template.html" %}
+{% load bootstrap %}
+
+{% block conteudo %}
+	<h1>Registration area</h1>
+	<div class="col-sm-8">
+	{% if not message %}
+	<form role="form" method="POST" action="{% url 'confirm_register' %}">
+		  {% csrf_token %}
+		  {{ form|bootstrap }}
+		  <button type="submit" class="btn btn-primary">Register</button>
+	</form>
+	{% else %}
+		<h2>{{ message }}</h2>
+		<br>
+		<a type="button" href="{% url 'url_login' %}" class="btn btn-primary">Play now</a>
+	{% endif %}
+	</div>
+{% endblock %}
+
