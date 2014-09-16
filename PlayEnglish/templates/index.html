@@ -1,29 +1,70 @@
-{% extends "base_template.html" %}
+{% extends "base_template_login.html" %}
 {% load bootstrap %}
 
 {% block conteudo %}
 
-    <h1>Welcome to game for learn english</h1>    
+    <div class="row col-lg-8 centralizado">
+    <!-- <div class="page-header"> -->
+        <div style="margin-left: 10%;">
+            <h1>Welcome to game for learn english</h1>
+        </div>
+    </div>
+    
+    <hr>
 
     <div class="row">
-            {% if form %}
-                <div class="col-md-4">
-                    <br>
-                    <form method="POST" action="." class="form-group">
-                        {% csrf_token %}
-                        {{form|bootstrap}}
-                        <input type="submit" class="btn btn-primary"/>
-                        <a type="button"  href="{% url 'register' %}" class="btn btn-success">Register</a>
-                    </form>
+        <div class="col-lg-6 centralizado">            
+
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
+                    <li><a href="#cadastro" data-toggle="tab">Cadastre-se</a></li>
+                </ul>
+
+                <div id="myTabContent" class="tab-content">
+                    
+                <!-- LOGIN -->
+                <div class="well bs-component tab-pane fade active in" id="login">
+                    {% if form %}
+
+                        <br>
+                        <form method="POST" action="." class="form-horizontal">
+                            {% csrf_token %}
+
+                            <!-- {{form|bootstrap}} -->
+
+                            {% for field in form %}
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">
+                                        {{ field.label_tag }}
+                                    </label>
+                                    <div class="col-lg-10">
+                                        {{ field }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                            <input type="submit" class="btn btn-success" value="Login"/>
+                        </form>
+                    {% else %}
+                    
+                        <a href="{% url 'url_login' %}">
+                            <button type="button" class="btn btn-primary">Jogar</button>
+                        </a>
+
+                    {% endif %}
                 </div>
-            {% else %}
-            <div class="col-md-4">
-                    <br>
-                    <a href="{% url 'url_login' %}">
-                        <button type="button" class="btn btn-primary">Jogar</button>
-                    </a>
+
+                <!-- CADASTRE-SE -->
+
+                <div class="well bs-component tab-pane fade" id="cadastro">
+                    
+                </div>                  
+                </div>
+
             </div>
-            {% endif %}
-       </div>
+        </div>
+    </div>
+    
 {% endblock %}
+
 

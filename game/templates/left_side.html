@@ -1,0 +1,37 @@
+<div class="row">  
+  
+  <!-- <div class="panel panel-default">
+    <div class="panel-heading">Olá Player {{player.user.username}}</div>
+    <div class="panel-body">
+      Até o momento você possui: {{player.points}} pontos<br>
+      Seu level é: {{player.get_level}}<br>
+    </div>
+  </div> -->
+       
+  <div class="list-group">
+    <a href="#" class="list-group-item active">
+      Olá Player {{player.user.username}}
+    </a>
+    <a href="#" class="list-group-item">Até o momento você possui: 
+      <span class="label label-success">{{player.points}} pontos</span>
+    </a>
+    <a href="#" class="list-group-item">Seu level é: 
+      <span class="label label-danger">{{player.get_level}}</span>      
+    </a>
+  </div>
+        
+  <!-- <ul class="list-group">
+    <li class="list-group-item">
+      Olá Player {{player.user.username}}
+    </li>
+    <li class="list-group-item">
+      <span class="badge">{{player.points}}</span>
+      Pontos
+    </li>
+    <li class="list-group-item">
+      <span class="badge">{{player.get_level}}</span>
+      Level
+    </li>
+  </ul> -->
+
+</div>

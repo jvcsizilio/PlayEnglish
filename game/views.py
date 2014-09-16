@@ -9,7 +9,7 @@ def home(request, dados={}):
     player = Player.objects.get(user=request.user)
     dados['list_words'] = player.sentences_unlocked.all()
     dados['player'] = player
-    return render(request, 'game.html', dados)
+    return render(request, 'home.html', dados)
 
 
 def register(request):
